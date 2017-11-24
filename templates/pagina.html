@@ -1,0 +1,44 @@
+{% extends "principal.html" %}
+{% block titulo %}
+	Página Principal
+{% endblock %}
+{% set active = 'pagina' %}
+{% block contenido %}
+	<div class="col s12 inicio-contenedor">
+		<div class="col s6">
+			<h3>¿Qué hay de nuevo?</h3>
+		</div>
+
+		<div class="tareas-por-hacer">
+			<h2>Tareas por hacer</h2>
+			<div class="col s12 m4">
+				<div class="card horizontal">
+					<div class="card-image">
+						<img src="https://lorempixel.com/100/190/nature/6">
+					</div>
+					<div class="card-stacked">
+						<div class="card-content">
+							<p>I am a very simple card. I am good at containing small bits of information.</p>
+						</div>
+						<div class="card-action">
+							<a href="#">This is a link</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{# <h3>GitHub Account {{ data.usuario }}</h3>
+		<p>Tus Repositorios ({{ data.total_repos }})</p>
+		<ul>
+			{% for repo in data.repos %}
+			<li>
+				<a class="repo_name" href="{{ url_for('repository', name=repo.name)}}">
+					{{ repo.name }}
+				</a>
+			</li>
+			{% endfor %}
+		</ul> #}
+	</div>	
+{% endblock %}			
+		

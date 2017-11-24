@@ -1,0 +1,57 @@
+body{
+	background: #EEE;
+}
+
+.bg-nav{
+	background: #11998e;
+	background: -webkit-linear-gradient(to right, #01579b, #11998e);
+	background: linear-gradient(to right, #01579b, #11998e); 
+}
+
+.nav-wrapper .nombre-proyecto{
+	font-size: 35px;
+	color: #FFF;
+	margin-left: 120px;
+}
+
+/*color: #2978e4;*/
+.inicio-contenedor h3{
+	font-size: 25px;
+	text-transform: uppercase;
+	color: #282828;
+}
+
+.inicio-contenedor h2{
+	font-size: 20px;
+}
+
+.inicio-contenedor p{
+	text-transform: uppercase;
+	font-size: 14px;
+}
+
+.inicio-contenedor .repo_name{
+	font-size: 12px;
+	font-weight: 700;
+	color: #2978e4;
+	text-decoration: none;
+}
+
+.inicio-contenedor .repo_name:hover{
+	color: #2978a4;
+}
+
+.entrar{
+	border: 1px solid #FFF;
+	width: 60%;
+	margin: 0 auto;
+	background-color: rgba(255,255,255,.7);
+	padding: 20px;
+}
+
+.fondo-usuario img{
+	width: 120px;
+	height: 80px;
+}
+
+

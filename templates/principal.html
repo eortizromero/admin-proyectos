@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+	<head>
+		<title>{% block titulo %}{% endblock %} - Administrador de Proyectos</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css' )}}" />
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/materialize.min.css') }}" />
+	</head>
+	<body>
+		<nav>
+			<div class="nav-wrapper bg-nav">
+				<a href="/" class="brand-logo nombre-proyecto">Project Manager</a>
+				<a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+				{% set nav_bar = [
+					('/', 'pagina', 'Página'),
+					('/entrar', 'entrar', 'Iniciar Sesión'),
+					('/registrar', 'registrar', 'Registrate'),
+					('/proyectos', 'proyectos', 'Proyectos'),
+				]-%}
+				{% set active = active|default('pagina') -%}
+				<ul class="right hide-on-med-and-down">
+				{% for href, id, text in nav_bar %}
+					<li{% if id == active %} class="active" {% endif %}><a href="{{ href|e }}">{{ text|e }}</a></li>
+				{% endfor %}
+				</ul>
+				<ul class="side-nav" id="mobile-demo">
+				{% for href, id, text in nav_bar %}
+					<li{% if id == active %} class="active" {% endif %}><a href="{{ href|e }}">{{ text|e }}</a></li>
+				{% endfor %}
+				</ul>
+			</div>
+		</nav>
+		<div class="row">
+			{% block contenido %} {% endblock %}
+		</div>
+		
+		<script type="text/javascript" src="{{ url_for('static', filename='js/jquery.min.js') }}">
+		</script>
+		<script type="text/javascript" src="{{ url_for('static', filename='js/materialize.min.js') }}">
+		</script>
+		<script type=text/javascript>
+			$(".button-collapse").sideNav();
+		</script>
+	</body>
+</html>
