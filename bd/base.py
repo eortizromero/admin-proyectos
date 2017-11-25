@@ -44,6 +44,11 @@ class BaseDatos(object):
 		self.ejecutar('DROP DATABASE IF EXISTS %s' % nombre)
 		self.ejecutar('CREATE DATABASE %s' % nombre)
 
-	def buscar(self, args):
-		print len(args)
-		print args[0]
+	def buscar(self, opciones=None):
+		opciones = opciones if opciones is not None else []
+		for o in opciones:
+			if not isinstance(o, (tuple, dict)):
+				raise TypeError("La consulta debe ser una tupla o diccionario.")
+			for d in o:
+				print d
+

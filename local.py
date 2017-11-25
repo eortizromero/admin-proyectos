@@ -13,7 +13,7 @@ app = Flask(__name__)
 base = bd.BaseDatos()
 base.conectar()
 # base.crear_bd('usuarios')
-base.buscar([('nombre', '=', 'juan'), ('edad', '=', '10')])
+base.buscar([('nombre', '=', 'Jorge'), ('edad', '=', '10')])
 
 @app.route('/')
 def pagina(data=None):
