@@ -5,6 +5,9 @@ from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
 class Sesion(object):
+	"""
+		Adminitra la sesión actual, y la guarda en caché
+	"""
 	def __init__(self):
 		pass
 
@@ -12,7 +15,7 @@ class Sesion(object):
 class ConexionPostgres(object):
 	def __init__(self, dominio=None, basedatos=None, usuario=None, contra=None, puerto=None):
 		self.dominio = dominio or 'localhost'
-		self.basedatos = basedatos or 'postgres'
+		self.basedatos = basedatos or 'manager'
 		self.usuario = usuario or 'manager'
 		self.contra = contra or 'admin00'
 		self.puerto = puerto or 5432
@@ -74,6 +77,14 @@ class BaseDatos(object):
 		return valor
 
 	def buscar(self, opciones):
+		'''
+		:params opciones: argumentos de consulta.
+
+		Ejemplo:
+			self.buscar([('nombre', '=', 'Edgar')])
+		: returns
+
+		'''
 		return self._buscar(opciones)
 
 	def _buscar(self, opciones=None):
@@ -92,6 +103,7 @@ class BaseDatos(object):
 				if filas:
 					for fila in filas:
 						res.append((fila[0]))
+						print "Res una opcion: ", str(res)
 				else:
 					print "No hay un registro con el %s de %s" %(opcion[0], opcion[2])
 			elif len(opciones) >= 2:
@@ -99,7 +111,7 @@ class BaseDatos(object):
 				operadores = self.get_operadores(opcion[1])
 				valores = self.get_valores(opcion[2])
 				args.append((campos, operadores, valores))
-				consulta = "SELECT * FROM usuarios WHERE " + " AND ".join(("%s %s %s" % (campo, operador, valor) for campo, operador, valor in args))
+				consulta = "SELECT * FROM tbl_users WHERE " + " AND ".join(("%s%s'%s'" % (campo, operador, valor) for campo, operador, valor in args))
 			else:
 				consulta = "SELECT * FROM tbl_users"
 				# cr.execute(consulta)
@@ -107,6 +119,16 @@ class BaseDatos(object):
 				# for fila in filas:
 				# 	print fila
 		if len(opciones) >= 2:
+			if isinstance(res, (tuple, list)):
+				cr.execute(consulta)
+				r = cr.fetchall()
+
+				def _uniquify_lista(seq):
+					v = set()
+					return [x for x in seq if x not in v and not v.add(x)]
+				_u_list = _uniquify_lista([x[0] for x in r])
+				print " Uniquify Lista", _u_list
+				return _u_list
 			print consulta
 		elif len(opciones) and opcion:
 			if isinstance(res, (tuple, list)):

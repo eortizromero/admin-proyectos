@@ -10,7 +10,7 @@
 		</div>
 
 		<div class="tareas-por-hacer">
-			<h2>Tareas asignadas a {{ data.user }}</h2>
+			<h2>{% if data.user %} Tareas asignadas a {{ data.user }}{% else %} No hay tareas asignadas. {% endif %}</h2>
 			<div class="col s12 m4">
 				<div class="card horizontal">
 					<div class="card-image">
