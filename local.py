@@ -10,20 +10,23 @@ g = Github('edgardoficial.yo@gmail.com', 'admin1992')
 app = Flask(__name__)
 
 
-base = bd.BaseDatos()
-base.conectar()
-# base.crear_bd('usuarios')
-base.buscar([('nombre', '=', 'Jorge'), ('edad', '=', '10')])
-
 @app.route('/')
 def pagina(data=None):
     total_repos = len([repo for repo in g.get_user().get_repos()])
+    base = bd.BaseDatos()
+    base.conectar()
+    # base.crear_bd('usuarios')
+    base._buscar([()])
+    usuario = base._buscar([('name', '=', 'Edgar')])
     data = {
             'usuario': g.get_user().name,
             'repos': g.get_user().get_repos(),
             'total_repos': total_repos,
+            'user': usuario,
             }
-
+    print "firts query"
+    base._buscar([('name', '=', 'Jorge'), ('edad', '=', '10'), ('activo', '=', True), ('es_admin', '=', True)])
+    print "second query"
     return render_template('pagina.html', data=data)
 
 
