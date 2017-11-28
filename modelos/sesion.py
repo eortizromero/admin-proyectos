@@ -3,9 +3,31 @@
 from bd import BaseDatos
 
 
-def inicio_sesion(usuario, contra):
-	base = BaseDatos()
-	base.conectar()
-	usuario = base.buscar([('usuario', '=', usuario), ('contra', '=', contra)])
-	# base.buscar([('usuario', '=', usuario)])
-	return usuario
+bd = BaseDatos()
+
+class Sesion(object):
+	def __init__(self):
+		self.base = bd
+		self._id = None
+
+	def inicio_sesion(self, usuario, contra):
+		base = self.base
+		base.conectar()
+		res = None
+		usuario = base.buscar([('usuario', '=', usuario), ('contra', '=', contra)])
+		if usuario:
+			res = True
+			self._id = usuario[0]
+		else:
+			res = False
+		return res
+
+	def get_nombre(self):
+		base = self.base
+		base.conectar()
+		nombre = base.encontrar_por_id([('id', '=', self._id)])
+		return nombre
+
+	@property
+	def nombre(self):
+		return self.get_nombre()

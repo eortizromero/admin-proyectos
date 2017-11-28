@@ -87,6 +87,7 @@ class BaseDatos(object):
 		'''
 		return self._buscar(opciones)
 
+
 	def _buscar(self, opciones=None):
 		opciones = opciones if opciones is not None else []
 		cr = self.conexion_postgres.get_cursor()
@@ -102,7 +103,7 @@ class BaseDatos(object):
 				filas = cr.fetchall()
 				if filas:
 					for fila in filas:
-						res.append((fila[0]))
+						res.append((fila))
 						print "Res una opcion: ", str(res)
 				else:
 					print "No hay un registro con el %s de %s" %(opcion[0], opcion[2])
@@ -129,14 +130,30 @@ class BaseDatos(object):
 				_u_list = _uniquify_lista([x[0] for x in r])
 				print " Uniquify Lista", _u_list
 				return _u_list
-			print consulta
 		elif len(opciones) and opcion:
 			if isinstance(res, (tuple, list)):
-				res = "".join(res)
+				# res = "".join(res)
+				pass
 			print consulta
 		else:
 			print consulta
 		return res
 
+	def encontrar_por_id(self, valores):
+		return self._encontrar_por_id(valores)
 
-
+	def _encontrar_por_id(self, valores=None):
+		valores = valores if valores is not None else []
+		consulta = None
+		res = []
+		cr = self.conexion_postgres.get_cursor()
+		for valor in valores:
+			if len(valores) and valor:
+				consulta = "SELECT * FROM tbl_users WHERE %s%s%s" %(valor[0], valor[1], valor[2])
+				cr.execute(consulta)
+				filas = cr.fetchall()
+				if filas:
+					for fila in filas:
+						res.append((fila[3])) # FIXME: get name by form field because data can be change
+		return "".join(res)
+		
