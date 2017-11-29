@@ -4,14 +4,6 @@ import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
 
 
-class Sesion(object):
-	"""
-		Adminitra la sesión actual, y la guarda en caché
-	"""
-	def __init__(self):
-		pass
-
-
 class ConexionPostgres(object):
 	def __init__(self, dominio=None, basedatos=None, usuario=None, contra=None, puerto=None):
 		self.dominio = dominio or 'localhost'
@@ -64,6 +56,11 @@ class BaseDatos(object):
 	# 	self.ejecutar('CREATE DATABASE %s' % nombre)
 
 
+	# TODO:
+	#		Mover esta parte a un archivo de consultas y procesos
+	#		solo dejar la parte de la conexion con postgres.
+	#		crear un cursor eficaz para cada conexion , con isolation level.
+
 	def get_campos(self, opcion):
 		campo = opcion
 		return campo
@@ -73,7 +70,7 @@ class BaseDatos(object):
 		return operador
 
 	def get_valores(self, opcion):
-		valor = opcion 
+		valor = opcion
 		return valor
 
 	def buscar(self, opciones):
@@ -156,4 +153,3 @@ class BaseDatos(object):
 					for fila in filas:
 						res.append((fila[3])) # FIXME: get name by form field because data can be change
 		return "".join(res)
-		

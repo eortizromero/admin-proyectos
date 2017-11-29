@@ -6,6 +6,9 @@ from bd import BaseDatos
 bd = BaseDatos()
 
 class Sesion(object):
+        '''
+        Controla el inicio de sesion y manda los datos para que Flask los guarde en cache.
+        '''
 	def __init__(self):
 		self.base = bd
 		self._id = None

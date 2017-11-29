@@ -5,7 +5,7 @@ body{
 .bg-nav{
 	background: #11998e;
 	background: -webkit-linear-gradient(to right, #01579b, #11998e);
-	background: linear-gradient(to right, #01579b, #11998e); 
+	background: linear-gradient(to right, #01579b, #11998e);
 	border-bottom: 5px solid #2ebd79;
 }
 
@@ -54,3 +54,7 @@ body{
 	width: 120px;
 	height: 80px;
 }
+
+/*.card{
+	background: #2D64ED !important;
+}*/
