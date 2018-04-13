@@ -6,8 +6,6 @@ import bd
 from modelos import Sesion
 
 
-# g = Github('edgardoficial.yo@gmail.com', 'admin1992')
-
 app = Flask(__name__)
 
 sesion = Sesion()
